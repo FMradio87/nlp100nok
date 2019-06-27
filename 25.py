@@ -10,15 +10,14 @@ def fetch_uk_data():
                 return js_data["text"]
 
 
-temple = re.compile(r'^{{基礎情報(|.*)\s*(=)\s*(.*)}}$',re.MULTILINE + re.VERBOSE)
-
+temple = re.compile(r'^\{\{基礎情報.*?\}\}$',re.MULTILINE + re.VERBOSE + re.DOTALL)
 data = temple.findall(fetch_uk_data())
+data2 = data[0].split('\n')
 
-for result in data:
-    field = result[0]
-    value = result[2]
-    print(field)
-    #print(value)
-#フィールド名（|.*" "）かな？
-#値　難しい、おそらく（＝の後の分？）ってことかな？
-#基礎情報自体は{{基礎情報-  }}で取れば出てくる？
+temple2 = re.compile(r'\|(?P<field>.+) = (?P<value>.+)')
+
+for base in data2:
+    m = temple2.match(base)
+    if m:
+        print(m.groupdict())
+
