@@ -11,4 +11,8 @@ reference_data = nlp_25.data2
 
 for retult in reference_data:
     Emphasis = re.sub(r'[\']', (''), retult)
-    print(Emphasis)
+    i = re.findall('=\s(.*)',Emphasis)
+    for retult3 in i:
+        if i:
+            print(retult3)
+
