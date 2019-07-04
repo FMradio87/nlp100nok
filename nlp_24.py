@@ -1,3 +1,8 @@
+'''
+24.ファイル参照の抽出
+記事から参照されているメディアファイルを全て抜き出せ
+'''
+
 import json
 import gzip
 import re

@@ -1,3 +1,8 @@
+'''
+25.テンプレートの抽出
+記事中に含まれる「基礎情報」テンプレートのフィールド名と値を抽出し、辞書オブジェクトとして格納せよ
+'''
+
 import json
 import gzip
 import re
@@ -18,7 +23,6 @@ temple2 = re.compile(r'\|(?P<field>.+) = (?P<value>.+)')
 
 
 for base in data2:
-     m = temple2.match(base)
-     if m:
+    m = temple2.match(base)
+    if m:
         print(m.groupdict())
-
