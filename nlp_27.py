@@ -4,12 +4,21 @@
 '''
 
 import re
-import nlp_26
+import nlp_25
 
 #リンクマークアップは[[,|,]]だと思うからそれをsubで置換する
+refarence_data2 = nlp_25.data2
 
-refarence_data2 = nlp_26.retult3
 
-link_mark = re.sub(r'[\[]',"",refarence_data2)
+for retult in refarence_data2:
+    Emphasis = re.sub(r'[\']', (''), retult)
+    i = re.sub(r'(\|)', (''), Emphasis)
+    i2 = re.sub(r'(\[)', (''), i)
+    i3 = re.sub(r'(\])', (''), i2)
+    i4 = re.sub(r'(\|)', (''), i3)
+    retult3 = re.findall('=\s(.*)', i4)
 
-print(type(link_mark))
+    for au in retult3:
+        if i:
+            retult2 = au
+            print(retult2)

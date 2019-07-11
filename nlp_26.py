@@ -14,5 +14,6 @@ for retult in reference_data:
     i = re.findall('=\s(.*)',Emphasis)
     for retult3 in i:
         if i:
-            print(retult3)
+            retult4 = retult3
+            print(retult4)
 
