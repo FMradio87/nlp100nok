@@ -3,14 +3,22 @@
 テンプレートの内容を利用し、国旗画像のURLを取得せよ。
 （ヒント：MediaWiki APIのimageinfoを呼び出して、ファイル参照をURLに変換すれば良い）
 '''
-#sub?を使って書き換えを行えばいいのかな？
-#国旗画像のURLとは？？？
+#書き換えじゃなくて参照して表示？
+#国旗画像のURLとは？？？（国旗のとこにあるやつ）
 import re
-import nlp_25
+import json
+import requests
+from nlp_20 import fetch_uk_data
 
-base = nlp_25.data2
 
-for i in base:
-    flag_file = re.search(r'Flag\sof\sthe\sUnited\sKingdom\.svg',i)
-    if flag_file:
-        print(flag_file.group(0))
+temple = re.compile(r'^\|(.+?)\s*=\s*(.+?)$',re.MULTILINE)
+base = temple.findall(fetch_uk_data())
+
+diction ={}
+
+for fields in base:
+    diction[fields[0]] = fields[1]
+
+flag = diction['国旗画像']
+
+print(flag)

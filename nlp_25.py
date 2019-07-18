@@ -1,7 +1,8 @@
 '''
 25.テンプレートの抽出
-記事中に含まれる「基礎情報」テンプレートのフィールド名と値を抽出し、辞書オブジェクトとして格納せよ
+記事中に含まれる「基礎情報」テンプレートのフィールド名と値を抽出し，辞書オブジェクトとして格納せよ
 '''
+
 
 import json
 import gzip
@@ -15,14 +16,16 @@ def fetch_uk_data():
                 return js_data["text"]
 
 
-temple = re.compile(r'^\{\{基礎情報.*?\}\}$',re.MULTILINE + re.VERBOSE + re.DOTALL)
+temple = re.compile(r'^\{\{基礎情報.*?(.*?)\}\}$',re.MULTILINE + re.VERBOSE + re.DOTALL)
 data = temple.findall(fetch_uk_data())
-data2 = data[0].split('\n')
 
-temple2 = re.compile(r'\|(?P<field>.+) = (?P<value>.+)')
+temple2 = re.compile(r'^\|(.+?)\s*=\s*(.+?)$',re.MULTILINE + re.DOTALL + re.VERBOSE)
 
+base = temple2.findall(data[0])
 
-for base in data2:
-    m = temple2.match(base)
-    if m:
-        print(m.groupdict())
+diction = {}
+
+for field in base:
+    diction[field[0]] = field[1]
+
+print(diction)
