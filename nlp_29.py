@@ -23,16 +23,20 @@ flag = diction['国旗画像']
 
 S = requests.Session()
 URL = "https://www.mediawiki.org/w/api.php"
-#TITLE = "Flag of the United Kingdom.svg"
-TITLE = flag
+TITLE = 'Flag of the United Kingdom.svg'
+#print(flag)
 
 PARAMS = {
-    'action':'parse',
-    'page':TITLE,
+    'action':'query',
+    'titles':'File:Flag of the United Kingdom.svg',
+    'prop':'imageinfo',
+    'iiprop':'url',
     'format':'json'
 }
 
 R = S.get(url=URL,params=PARAMS)
-DATA = R.json()
+data = R.json()
 
-print(DATA)
+print(data)
+
+#なんかできたぞ…！？　参考にしたページhttps://www.mediawiki.org/wiki/API:Imageinfo
