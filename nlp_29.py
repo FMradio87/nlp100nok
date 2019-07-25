@@ -21,4 +21,18 @@ for fields in base:
 
 flag = diction['国旗画像']
 
-print(flag)
+S = requests.Session()
+URL = "https://www.mediawiki.org/w/api.php"
+#TITLE = "Flag of the United Kingdom.svg"
+TITLE = flag
+
+PARAMS = {
+    'action':'parse',
+    'page':TITLE,
+    'format':'json'
+}
+
+R = S.get(url=URL,params=PARAMS)
+DATA = R.json()
+
+print(DATA)
