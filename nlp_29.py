@@ -37,6 +37,10 @@ PARAMS = {
 R = S.get(url=URL,params=PARAMS)
 data = R.json()
 
-print(data)
+PAGES = data['query']['pages']
+
+for k,v in PAGES.items():
+    print(v['imageinfo'][0]['url'])
 
 #なんかできたぞ…！？　参考にしたページhttps://www.mediawiki.org/wiki/API:Imageinfo
+#ちょっと直した。これでURLだけ出るようになったはず…
